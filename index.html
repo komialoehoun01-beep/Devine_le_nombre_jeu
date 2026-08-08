@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Devinette</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+
+<h1>🎯 Jeu de Devinette</h1>
+<div class="box-niveau">
+    <label>Niveau :</label>
+    <select id="niveau">
+        <option value="facile">Facile</option>
+        <option value="moyen">Moyen</option>
+        <option value="difficile">Difficile</option>
+    </select>
+</div>
+  <div class="game-box">
+    <p id="instruction">Devinez un nombre !</p>
+    <input
+    type="number"
+    id ="guessInput"
+    placeholder="Votre proposition">
+
+    <button id="checkBtn">Valider</button>
+    <button id="restartBtn">Nouvelle partie</button>
+    <p id="message"></p>
+    <p>
+        Essais restants : <span id="tries">0</span>
+    </p>
+
+    <p> 
+        Score : <span id="score">0</span>
+    </p>
+    <p>
+        Temps écoulé : <span id="timer">0</span> secondes
+    </p>
+    <div id ="historique"></div>
+</div>
+<script src="js/game.js"></script>
+
+</body>
+</html>
