@@ -2,6 +2,7 @@
 let secretnumber;
 let maxAttempts;
 let attemptsLeft;
+let currentScore = 0;
 
 const checkBtn = document.getElementById("checkBtn");
 const restartBtn = document.getElementById("restartBtn");
@@ -41,6 +42,8 @@ function restartGame(){
     document.getElementById("message").textContent = "Choisissez un niveau et commencez à jouer!";
     document.getElementById("guessInput").value = "Entrez votre proposition...";
     checkBtn.disabled = false;
+    currentScore = 0;
+    document.getElementById("score").textContent = currentScore;
 }
 
 function checkGuess(){
@@ -54,7 +57,12 @@ function checkGuess(){
 
     const message = document.getElementById("message");
     if (guess === secretnumber) {
-        message.textContent = "🎉 Bravo, vous avez gagné !";
+
+        const level = document.getElementById("niveau").value;
+        currentScore = calculateScore(level, attemptsLeft);
+        document.getElementById("score").textContent = currentScore;
+        updateBestScore(currentScore);
+        message.textContent = `🎉 Bravo, vous avez gagné ! votre Score est : ${currentScore}`;
         checkBtn.disabled = true;
         return;
     }
@@ -84,3 +92,4 @@ restartBtn.addEventListener(
 );
 
 setupLevel();
+loadBestScore();
