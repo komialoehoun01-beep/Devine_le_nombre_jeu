@@ -3,6 +3,8 @@ let secretnumber;
 let maxAttempts;
 let attemptsLeft;
 let currentScore = 0;
+let history = [];
+let attemptsNumber = 0;
 
 const checkBtn = document.getElementById("checkBtn");
 const restartBtn = document.getElementById("restartBtn");
@@ -44,6 +46,9 @@ function restartGame(){
     checkBtn.disabled = false;
     currentScore = 0;
     document.getElementById("score").textContent = currentScore;
+     history = [];
+    attemptsNumber = 0;
+    document.getElementById("history").innerHTML = "";
 }
 
 function checkGuess(){
@@ -62,15 +67,18 @@ function checkGuess(){
         currentScore = calculateScore(level, attemptsLeft);
         document.getElementById("score").textContent = currentScore;
         updateBestScore(currentScore);
+        addToHistory(guess, "Trouvé✅");
         message.textContent = `🎉 Bravo, vous avez gagné ! votre Score est : ${currentScore}`;
         checkBtn.disabled = true;
         return;
     }
 
     if(guess < secretnumber) {
+        addToHistory(guess, "Trop petit");
         message.textContent = "📈 plus grand ! Essayez encore.";
     }
     else {
+        addToHistory(guess, "Trop grand");
         message.textContent = " 📉plus petit ! Essayez encore.";
     }
 
@@ -91,5 +99,51 @@ restartBtn.addEventListener(
     restartGame
 );
 
+function addToHistory(value, result) {
+
+    attemptNumber++;
+
+    history.push({
+        attempt: attemptNumber,
+        guess: value,
+        result: result
+    });
+
+    displayHistory();
+}
+
+//Affichage de l'historique des tentatives
+function displayHistory() {
+    const historyList = document.getElementById("history");
+    historyList.innerHTML = "";
+    history.forEach(entry => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `Tentative ${entry.attempt}: Vous avez proposé ${entry.guess} - Résultat: ${entry.result}`;
+        historyList.appendChild(listItem);
+    });
+
+    localStorage.setItem(
+    "gameHistory",
+    JSON.stringify(history)
+);
+}
+
+
+function loadHistory() {
+
+    const savedHistory =
+        JSON.parse(
+            localStorage.getItem("gameHistory")
+        ) || [];
+
+    history = savedHistory;
+
+    attemptNumber = history.length;
+
+    displayHistory();
+}
+
+
 setupLevel();
 loadBestScore();
+loadHistory();

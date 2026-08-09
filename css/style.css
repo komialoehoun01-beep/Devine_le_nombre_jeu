@@ -47,3 +47,21 @@ button {
   margin-top: 15px;
   font-weight: bold;
 }
+
+.history-box {
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.history-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.history-box li {
+    padding: 8px;
+    margin: 5px 0;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+}
