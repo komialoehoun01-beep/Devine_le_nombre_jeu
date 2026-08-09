@@ -1,3 +1,4 @@
+/* Style global pour le jeu */
 * {
   margin: 0;
   padding: 0;
@@ -13,11 +14,13 @@ body {
   min-height: 100vh;
 }
 
+/* Conteneur principal centré */
 .container {
   width: 90%;
   max-width: 500px;
 }
 
+/* Carte du jeu */
 .game-box {
   background: white;
   padding: 20px;
@@ -25,17 +28,20 @@ body {
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
+/* Titre du jeu */
 h1 {
   text-align: center;
   margin-bottom: 20px;
 }
 
+/* Champ de saisie */
 input {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
 }
 
+/* Boutons du jeu */
 button {
   padding: 10px;
   margin-top: 10px;
@@ -43,11 +49,7 @@ button {
   cursor: pointer;
 }
 
-.message {
-  margin-top: 15px;
-  font-weight: bold;
-}
-
+/* Boîte d'historique */
 .history-box {
     margin-top: 20px;
     padding: 10px;

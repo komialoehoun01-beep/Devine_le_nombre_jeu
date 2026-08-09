@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeu de Devinette</title>
+    <!-- Style du jeu -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <div class="container">
 
 <h1>🎯 Jeu de Devinette</h1>
+
+<!-- Choix du niveau -->
 <div class="box-niveau">
     <label>Niveau :</label>
     <select id="niveau">
@@ -18,12 +21,14 @@
         <option value="difficile">Difficile</option>
     </select>
 </div>
-  <div class="game-box">
+
+<!-- Zone de jeu -->
+<div class="game-box">
     <p id="instruction">Devinez un nombre !</p>
     <input
-    type="number"
-    id ="guessInput"
-    placeholder="Votre proposition">
+        type="number"
+        id="guessInput"
+        placeholder="Votre proposition">
 
     <button id="checkBtn">Valider</button>
     <button id="restartBtn">Nouvelle partie</button>
@@ -31,8 +36,7 @@
     <p>
         Essais restants : <span id="tries">0</span>
     </p>
-
-    <p> 
+    <p>
         Score : <span id="score">0</span>
     </p>
     <p>
@@ -41,12 +45,17 @@
     <p>
         Meilleur score : <span id="bestScore">0</span>
     </p>
-    <div class ="historique-box">
+
+    <!-- Historique des essais -->
+    <div class="historique-box">
         <h3>Historique des tentatives :</h3>
         <ul id="history"></ul>
     </div>
 </div>
+
+<!-- Scripts du jeu -->
 <script src="js/score.js"></script>
+<script src="js/timer.js"></script>
 <script src="js/game.js"></script>
 
 </body>
