@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Historique des tentatives</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Historique - Dernière partie</h1>
+
+    <div class="panel">
+      <h3>Passez en revue vos tentatives</h3>
+      <ul id="historyList"></ul>
+
+      <p>
+        <button id="clearHistoryPageBtn" class="btn danger">Supprimer l'historique</button>
+        <a href="index.html" class="btn secondary">Retour au jeu</a>
+      </p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <script>
+    function loadHistory() {
+      try {
+        const raw = localStorage.getItem('gameHistory');
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function render() {
+      const list = document.getElementById('historyList');
+      list.innerHTML = '';
+      const items = loadHistory();
+      if (!items || items.length === 0) {
+        const li = document.createElement('li');
+        li.textContent = 'Aucune tentative enregistrée.';
+        list.appendChild(li);
+        return;
+      }
+      items.forEach(entry => {
+        const li = document.createElement('li');
+        li.textContent = `Tentative ${entry.attempt}: ${entry.guess} — ${entry.result}`;
+        list.appendChild(li);
+      });
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      if (!t) return;
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    document.getElementById('clearHistoryPageBtn').addEventListener('click', () => {
+      if (!confirm("Supprimer l'historique des tentatives ?")) return;
+      // Use the shared helper if present
+      if (typeof clearGameHistory === 'function') {
+        clearGameHistory();
+      } else {
+        localStorage.setItem('gameHistory', JSON.stringify([]));
+      }
+      render();
+      showToast('Historique supprimé.');
+    });
+
+    render();
+  </script>
+</body>
+</html>

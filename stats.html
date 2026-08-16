@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Statistiques du jeu</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Statistiques</h1>
+    <div class="panel">
+      <p>Parties jouées : <strong id="played">0</strong></p>
+      <p>Parties gagnées : <strong id="won">0</strong></p>
+      <p>Parties perdues : <strong id="lost">0</strong></p>
+      <p>Temps moyen : <strong id="avg">0</strong> secondes</p>
+
+      <h3>Historique des parties</h3>
+      <ul id="gamesList"></ul>
+
+      <p>
+        <a href="index.html" class="btn secondary">Retour au jeu</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function loadGames() {
+      const raw = localStorage.getItem('games');
+      return raw ? JSON.parse(raw) : [];
+    }
+
+    const games = loadGames();
+    const playedEl = document.getElementById('played');
+    const wonEl = document.getElementById('won');
+    const lostEl = document.getElementById('lost');
+    const avgEl = document.getElementById('avg');
+    const gamesList = document.getElementById('gamesList');
+
+    playedEl.textContent = games.length;
+    const wins = games.filter(g => g.result === 'Gagne').length;
+    const losses = games.filter(g => g.result === 'Perdu').length;
+    wonEl.textContent = wins;
+    lostEl.textContent = losses;
+
+    if (games.length > 0) {
+      const totalTime = games.reduce((s,g) => s + (g.time||0), 0);
+      avgEl.textContent = Math.round(totalTime / games.length);
+
+      games.slice().reverse().forEach(g => {
+        const li = document.createElement('li');
+        li.textContent = `${g.date} — Niveau: ${g.level} — Résultat: ${g.result} — Temps: ${g.time}s — Score: ${g.score}`;
+        gamesList.appendChild(li);
+      });
+    } else {
+      avgEl.textContent = 0;
+      const li = document.createElement('li');
+      li.textContent = 'Aucune partie enregistrée.';
+      gamesList.appendChild(li);
+    }
+  </script>
+</body>
+</html>

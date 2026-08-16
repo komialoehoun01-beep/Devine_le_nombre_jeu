@@ -12,6 +12,17 @@
 
 <h1>🎯 Jeu de Devinette</h1>
 
+    <!-- Intro overlay avant le début -->
+    <div id="intro-overlay" class="intro-overlay">
+        <div class="intro-card">
+            <h2>Prêt à relever le défi ?</h2>
+            <p class="lead">Devinez le nombre secret — fais le plus vite possible et vise le meilleur score !</p>
+            <div class="intro-actions">
+                <button id="startBtn" class="btn">Commencer</button>
+            </div>
+        </div>
+    </div>
+
 <!-- Choix du niveau -->
 <div class="box-niveau">
     <label>Niveau :</label>
@@ -33,29 +44,53 @@
     <button id="checkBtn">Valider</button>
     <button id="restartBtn">Nouvelle partie</button>
     <p id="message"></p>
+    <!-- Essais visibles pendant la partie -->
     <p>
         Essais restants : <span id="tries">0</span>
     </p>
     <p>
-        Score : <span id="score">0</span>
-    </p>
-    <p>
         Temps écoulé : <span id="timer">0</span> secondes
     </p>
-    <p>
-        Meilleur score : <span id="bestScore">0</span>
-    </p>
 
-    <!-- Historique des essais -->
-    <div class="historique-box">
-        <h3>Historique des tentatives :</h3>
-        <ul id="history"></ul>
+    <!-- Zone affichée uniquement après la fin de la partie -->
+    <div id="end-zone" style="display:none">
+        <p>
+            Score : <span id="score">0</span>
+        </p>
+        <p>
+            Meilleur score : <span id="bestScore">0</span>
+        </p>
+
+        <!-- Séparation en deux panneaux distincts -->
+        <div class="end-grid">
+            <section id="history-panel" class="panel historique-box">
+                <h3>
+                    Historique des tentatives
+                    <button id="toggleHistoryBtn" class="tiny-btn">Masquer</button>
+                    <button id="clearHistoryBtn" class="tiny-btn danger">Supprimer</button>
+                </h3>
+                <ul id="history"></ul>
+            </section>
+
+            <aside id="stats-panel" class="panel stats-box">
+                <h3>Statistiques</h3>
+                <p>Parties jouées : <span id="gamesPlayed">0</span></p>
+                <p>Parties gagnées : <span id="gamesWon">0</span></p>
+                <p>Parties perdues : <span id="gamesLost">0</span></p>
+                <p>Temps moyen : <span id="averageTime">0</span> secondes</p>
+            </aside>
+        </div>
+        <div style="margin-top:14px">
+            <a href="history.html" class="btn" target="_blank" rel="noopener noreferrer">Voir l'historique</a>
+            <a href="stats.html" class="btn secondary" target="_blank" rel="noopener noreferrer">Voir les stats</a>
+        </div>
     </div>
 </div>
 
 <!-- Scripts du jeu -->
 <script src="js/score.js"></script>
 <script src="js/timer.js"></script>
+<script src="js/sauvegarde.js"></script>
 <script src="js/game.js"></script>
 
 </body>
