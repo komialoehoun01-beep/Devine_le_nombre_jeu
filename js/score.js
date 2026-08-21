@@ -25,10 +25,10 @@ function calculateScore(level, attemptsLeft) {
 
 // Met à jour le meilleur score dans le stockage local
 function updateBestScore(score) {
-    let bestScore = localStorage.getItem("bestScore") || 0;
+    let bestScore = Number(localStorage.getItem("bestScore") || 0);
 
     if (score > bestScore) {
-        localStorage.setItem("bestScore", score);
+        localStorage.setItem("bestScore", String(score));
         bestScore = score;
     }
 
@@ -37,6 +37,6 @@ function updateBestScore(score) {
 
 // Charge et affiche le meilleur score enregistré
 function loadBestScore() {
-    let bestScore = localStorage.getItem("bestScore") || 0;
+    let bestScore = Number(localStorage.getItem("bestScore") || 0);
     document.getElementById("bestScore").textContent = bestScore;
 }

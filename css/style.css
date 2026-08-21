@@ -2,17 +2,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 :root {
-  --bg-1: #0f172a; /* deep navy */
+  --bg-1: #0f172a; /* bleu marine profond */
   --bg-2: #2b2f6b; /* indigo */
   --card: rgba(255,255,255,0.06);
   --panel: rgba(255,255,255,0.04);
-  --accent: #ffb020; /* warm yellow */
-  --accent-2: #7ee7c7; /* mint */
+  --accent: #ffb020; /* jaune chaleureux */
+  --accent-2: #7ee7c7; /* menthe */
   --text: #e6eef8;
   --muted: #9fb0d6;
 }
 
-/* New refined palette and sizes */
+/* Palette affinée et tailles */
 :root {
   --glass-contrast: rgba(255,255,255,0.06);
   --surface: rgba(255,255,255,0.03);
@@ -350,7 +350,7 @@ p { color: var(--muted); margin: 8px 0 }
 #end-zone.result-lose::before {
   content: '💀 Perdu';
   position: absolute;
-  top: -60px; /* pull higher to overlap the game area */
+  top: -60px; /* remonter pour chevaucher la zone de jeu */
   left: 50%;
   transform: translateX(-50%) translateY(-10%);
   background: linear-gradient(90deg, rgba(255,80,80,0.18), rgba(255,80,80,0.10));
@@ -358,7 +358,7 @@ p { color: var(--muted); margin: 8px 0 }
   padding: 12px 18px;
   border-radius: 12px;
   font-weight: 800;
-  font-size: 1.6rem; /* larger label */
+  font-size: 1.6rem; /* étiquette plus grande */
   z-index: 2200;
   box-shadow: 0 12px 30px rgba(255,80,80,0.08);
   animation: bounceIn 520ms cubic-bezier(.22,1,.36,1);
@@ -368,10 +368,10 @@ p { color: var(--muted); margin: 8px 0 }
 #end-zone.result-lose::after {
   content: '💀';
   position: absolute;
-  right: -18px; /* position to the right, not centered */
+  right: -18px; /* positionné à droite, non centré */
   top: -8px;
-  transform: none; /* no centering or rotation */
-  font-size: 5.6rem; /* large but not centered-dominant */
+  transform: none; /* sans centrage ni rotation */
+  font-size: 5.6rem; /* grande icône, mais non dominante au centre */
   opacity: 0.12;
   filter: drop-shadow(0 6px 18px rgba(0,0,0,0.45));
   z-index: 2100;
@@ -383,7 +383,7 @@ p { color: var(--muted); margin: 8px 0 }
   to { transform: translateX(-50%) translateY(0) scale(1); opacity:1 }
 }
 
-/* Confetti */
+.confetti-container { /* conteneur de confettis */ }
 .confetti-container { position: fixed; pointer-events: none; left: 0; top: 0; width: 100%; height: 0; z-index: 1600; }
 .confetti {
   position: absolute;
@@ -398,7 +398,7 @@ p { color: var(--muted); margin: 8px 0 }
   to { transform: translateY(120vh) rotate(520deg); opacity: 1 }
 }
 
-/* End adjustments: responsive tweaks */
+/* Ajustements finaux : réglages responsive */
 @media (max-width: 520px) {
   .container { max-width: 96%; padding: 18px }
   .intro-card h2 { font-size: 1.25rem }

@@ -15,7 +15,7 @@ const clearHistoryBtn = document.getElementById("clearHistoryBtn");
 const introOverlay = document.getElementById('intro-overlay');
 const startBtn = document.getElementById('startBtn');
 
-// Restore persisted history panel visibility (true/false as string)
+// Restaurer la visibilité de l'historique depuis le stockage local
 function restoreHistoryVisibility() {
     const panel = document.getElementById('history-panel');
     if (!panel || !toggleHistoryBtn) return;
@@ -25,7 +25,7 @@ function restoreHistoryVisibility() {
     toggleHistoryBtn.textContent = visible ? 'Masquer' : 'Afficher';
 }
 
-// Persist visibility
+// visibilité de l'historique des tentatives
 function setHistoryVisibility(visible) {
     const panel = document.getElementById('history-panel');
     if (!panel || !toggleHistoryBtn) return;
@@ -176,10 +176,9 @@ if (startBtn && introOverlay) {
         introOverlay.classList.remove('show');
         // lancer une nouvelle partie
         restartGame();
+// Basculer l'affichage de l'historique indépendamment
     });
 }
-
-// (skipIntroBtn removed) — intro only starts via `Commencer`
 
 // Basculer l'affichage de l'historique indépendamment
 if (toggleHistoryBtn) {
@@ -195,14 +194,14 @@ if (toggleHistoryBtn) {
 if (clearHistoryBtn) {
     clearHistoryBtn.addEventListener('click', () => {
         if (!confirm('Supprimer l\'historique des tentatives ? Cette action est irréversible.')) return;
-        // Prefer using the helper if available
+        // Utiliser la fonction d'aide si elle existe
         if (typeof clearGameHistory === 'function') {
             clearGameHistory();
         } else {
             localStorage.removeItem('gameHistory');
         }
         history = [];
-        // Persist the empty history so other pages/tabs see the change
+        // Persister l'historique vide pour que les autres onglets/pages voient le changement
         if (typeof displayHistory === 'function') displayHistory();
         attemptNumber = 0;
         const list = document.getElementById('history');
@@ -246,17 +245,17 @@ function emitConfetti(count) {
     for (let i = 0; i < count; i++) {
         const el = document.createElement('div');
         el.className = 'confetti';
-        const left = Math.random() * 100; // vw
+        const left = Math.random() * 100; // en vw (largeur du viewport)
         el.style.left = left + 'vw';
         el.style.background = colors[Math.floor(Math.random() * colors.length)];
         el.style.transform = `translateY(-10vh) rotate(${Math.random()*360}deg)`;
         el.style.opacity = (0.7 + Math.random()*0.3).toString();
         el.style.animationDelay = (Math.random() * 200) + 'ms';
         container.appendChild(el);
-        // cleanup
+        // supprimer l'élément après l'animation pour éviter accumulation
         setTimeout(() => { el.remove(); }, 1700 + Math.random()*400);
     }
-    // remove container eventually if empty
+    // suppression du container après un délai pour éviter accumulation
     setTimeout(() => { if (container.childElementCount === 0) container.remove(); }, 2200);
 }
 
@@ -280,13 +279,13 @@ function loadHistory() {
     attemptNumber = history.length;
 }
 
-// Initial page setup (ne pas démarrer le timer — attendre l'intro)
+// Initialisation de la page (ne pas démarrer le timer — attendre l'intro)
 setupLevel();
 loadBestScore();
 loadHistory();
 resetTimer();
 // Afficher l'overlay d'introduction
 if (introOverlay) introOverlay.classList.add('show');
-// restore UI preferences and stats
+// restaurer les préférences UI et les statistiques
 restoreHistoryVisibility();
 updateStats();

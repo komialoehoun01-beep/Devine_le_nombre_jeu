@@ -60,7 +60,7 @@
 
     document.getElementById('clearHistoryPageBtn').addEventListener('click', () => {
       if (!confirm("Supprimer l'historique des tentatives ?")) return;
-      // Use the shared helper if present
+      // Utiliser l'aide partagée si disponible
       if (typeof clearGameHistory === 'function') {
         clearGameHistory();
       } else {
